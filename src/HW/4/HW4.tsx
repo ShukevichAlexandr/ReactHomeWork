@@ -14,40 +14,40 @@ export const HW4 = () => {
 
   // ❗ Массив с данными не трогаем! Текст не меняем !
 
-  const [currentText, setCurrentText] = useState('');
+  const [currentText, setCurrentText] = useState(''); // Текущее значение поля ввода
   const [texts, setTexts] = useState<string[]>([
-    'То, что вы делаете по ночам, то и делает вас богатым. (Аль Капоне)',
+    'То, что вы делаете по ночам, то и делает вас богатым. (Аль Капоне)', // Начальное сообщение
   ]);
 
   const handleSave = () => {
-    setTexts([currentText, ...texts]);
-    setCurrentText('');
+    if (!currentText.trim()) return; // Проверка на пустоту строки
+    setTexts([currentText, ...texts]); // Новый текст добавляется в начало массива
+    setCurrentText(''); // Чистка поля ввода
   };
 
   return (
     <div id={'hw04'}>
-      {/*{currentText ? (*/}
-      {/*  <h1 id={'hw04-text'}>{currentText}</h1>*/}
-      {/*) : (*/}
-      {/*  <h1 id={'hw04-default-text'}>Здесь появится новое дело</h1>*/}
-      {/*)}*/}
+      {currentText ? (
+        <h1 id={'hw04-text'}>{currentText}</h1>
+      ) : (
+        <h1 id={'hw04-default-text'}>Здесь появится новое дело</h1>
+      )}
 
-      {/*<Input НЕ ХВАТАЕТ АРГУМЕНТОВ />*/}
+      <Input currentText={currentText} setCurrentText={setCurrentText} />
 
-      {/*<Button НЕ ХВАТАЕТ АРГУМЕНТОВ />*/}
+      <Button callBack={handleSave} name={'Сохранить'} />
 
-      {/*<h1 style={{ marginTop: '50px' }}>СПИСОК ДЕЛ НА ДЕНЬ:</h1>*/}
+      <h1 style={{ marginTop: '50px' }}>СПИСОК ДЕЛ НА ДЕНЬ:</h1>
 
-      {/*<ol id={'hw04-tasks'}>*/}
-      {/*  {texts.map((el, index) => {*/}
-      {/*    return (*/}
-      {/*      <li key={index} id={`hw04-task-${index}`} className={ЕСЛИ ЧЕТН ? S.chetNechet : ''}>*/}
-      {/*        {el}*/}
-      {/*      </li>*/}
-      {/*    );*/}
-      {/*  })}*/}
-      {/*</ol>*/}
+      <ol id={'hw04-tasks'}>
+        {texts.map((el, index) => {
+          return (
+            <li key={index} id={`hw04-task-${index}`} className={index % 2 === 0  ? s.chetNechet : ''}>
+              {el}
+            </li>
+        );
+      })}
+      </ol>
     </div>
   );
-};
-
+}

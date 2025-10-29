@@ -1,14 +1,14 @@
 type InputPropsType = {
-	currentText: any // НУЖНО ПРОТИПИЗИРОВАТЬ
-	setCurrentText: any // НУЖНО ПРОТИПИЗИРОВАТЬ
+	currentText: string // НУЖНО ПРОТИПИЗИРОВАТЬ
+  	setCurrentText: React.Dispatch<React.SetStateAction<string>>; // НУЖНО ПРОТИПИЗИРОВАТЬ
 };
 
-export const Input = (props: InputPropsType) => {
-	const onChangeHandler = (event: 'НУЖНО ПРОТИПИЗИРОВАТЬ') => {
-		// НУЖНО ДОПИСАТЬ
-	};
+export const Input = ({ currentText, setCurrentText }: InputPropsType) => {
+    const onChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setCurrentText(event.target.value); // Устанавливаем новое состояние input
+    };
 
-	// return (
-	//   <input id={'hw04-input'} type="text" value={props.currentText} onChange={onChangeHandler} />
-	// );
+	return (
+	<input id={'hw04-input'} type="text" value={currentText} onChange={onChangeHandler} />
+	);
 };
